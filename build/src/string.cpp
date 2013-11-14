@@ -3,13 +3,12 @@
 #include <vector>
 #include <clocale>
 #include <cstring>
-#include <stdio.h>
-#include "checked.h"
+#include "utf8.h"
 #include <neko.h>
 
 using namespace std;
 
-value oem_to_utf8(value src)
+value string_oem_to_utf8(value src)
 {	
 	setlocale(LC_ALL, "");
 	
@@ -25,9 +24,9 @@ value oem_to_utf8(value src)
 	value r = alloc_string(u8.c_str());
 	return r;
 }
-DEFINE_PRIM(oem_to_utf8, 1);
+DEFINE_PRIM(string_oem_to_utf8, 1);
 
-value utf8_to_oem(value src)
+value string_utf8_to_oem(value src)
 {	
 	setlocale(LC_ALL, "");
 	
@@ -39,9 +38,10 @@ value utf8_to_oem(value src)
 	vector<wchar_t> v16; utf8::utf8to16(v8.begin(), v8.end(), back_inserter(v16));
 	
 	char p8[srcLen + 1];
-	wcstombs(p8, &v16[0], srcLen);
+	int dstLen = wcstombs(p8, &v16[0], v16.size());
+	p8[dstLen] = '\0';
 	
 	value r = alloc_string(p8);
 	return r;
 }
-DEFINE_PRIM(utf8_to_oem, 1);
+DEFINE_PRIM(string_utf8_to_oem, 1);

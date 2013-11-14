@@ -38,6 +38,7 @@
   <hiddenPaths>
     <hidden path="bin" />
     <hidden path="library.zip" />
+    <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
