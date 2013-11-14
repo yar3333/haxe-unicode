@@ -2,6 +2,7 @@ package;
 
 import neko.unicode.UnicodeStringTools;
 import neko.unicode.File;
+import neko.unicode.FileSystem;
 
 class UnicodeTest extends haxe.unit.TestCase
 {
@@ -25,5 +26,20 @@ class UnicodeTest extends haxe.unit.TestCase
 		File.saveContent("ыяч.txt", src);
 		var dst = File.getContent("ыяч.txt");
 		assertEquals(dst, src);
+    }
+	
+	public function testReadDir()
+    {
+		var files = FileSystem.readDirectory(".");
+		print("\nFILES = \n" + files.join("\n") + "\nEND\n");
+		assertTrue(true);
+    }
+	
+	public function testIsDirectory()
+    {
+		assertTrue(FileSystem.isDirectory("dir"));
+		assertTrue(FileSystem.isDirectory("папка"));
+		assertTrue(!FileSystem.isDirectory("файл.txt"));
+		assertTrue(!FileSystem.isDirectory("file.txt"));
     }
 }
