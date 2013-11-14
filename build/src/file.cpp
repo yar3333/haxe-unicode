@@ -1,25 +1,22 @@
-#include <vector>
 #include <cstring>
 #include <stdio.h>
+#include <algorithm>
 #include "utf8.h"
-#include <neko.h>
+#include "common.h"
 
 using namespace std;
 
-vector<wchar_t> valueUtf8ToVector16(value src)
-{
-	int srcLen = val_strlen(src);
-	
-	std::vector<char> v8(srcLen);
-	memcpy(&v8[0], val_string(src), srcLen);
-	
-	vector<wchar_t> v16; utf8::utf8to16(v8.begin(), v8.end(), back_inserter(v16));
-	return v16;
-}
-
 value file_get_content(value filePath)
 {	
-	FILE *f = _wfopen(&valueUtf8ToVector16(filePath).front(), L"rb");
+	vector<wchar_t> filePath16 = preparePath(filePath);
+	FILE *f = _wfopen(&filePath16[0], L"rb");
+	if (!f)
+	{
+		vector<wchar_t> filePath8; utf8::utf16to8(filePath16.begin(), filePath16.end(), back_inserter(filePath8));
+		filePath8.push_back(0);
+		char buf[65536]; sprintf(buf, "Can't open file '%s' for reading.", &filePath8[0]);
+		failure(buf);
+	}
 	fseek(f, 0, SEEK_END);
 	size_t size = ftell(f);
 	char *buf = new char[size + 1];
@@ -35,7 +32,12 @@ DEFINE_PRIM(file_get_content, 1);
 
 value file_save_content(value filePath, value content)
 {	
-	FILE *f = _wfopen(&valueUtf8ToVector16(filePath).front(), L"wb");
+	FILE *f = _wfopen(&preparePath(filePath).front(), L"wb");
+	if (!f)
+	{
+		char buf[65536]; sprintf(buf, "Can't open file '%s' for writing.", val_string(filePath));
+		failure(buf);
+	}
 	fputs(val_string(content), f);
 	fclose(f);
 	return val_true;

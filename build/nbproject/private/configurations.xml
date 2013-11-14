@@ -2,7 +2,10 @@
 <configurationDescriptor version="89">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="src" name="src">
+      <in>common.cpp</in>
+      <in>common.h</in>
       <in>file.cpp</in>
+      <in>filesystem.cpp</in>
       <in>string.cpp</in>
       <in>utf8.h</in>
       <in>utf8_core.h</in>
