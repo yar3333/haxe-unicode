@@ -6,6 +6,6 @@
   "contributors": ["yar3333"],
   "releasenote": "Init version.",
   "version": "1.0.0",
-  "url": "https://code.google.com/p/haxe-unicode/",
+  "url": "https://bitbucket.org/yar3333/haxe-unicode",
   "dependencies": {}
 }
