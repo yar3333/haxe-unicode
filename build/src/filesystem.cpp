@@ -63,3 +63,19 @@ value filesystem_is_directory(value path)
 	return (stbuf.st_mode & S_IFMT ) == S_IFDIR ? val_true : val_false;
 }
 DEFINE_PRIM(filesystem_is_directory, 1);
+
+value filesystem_rename(value src, value dest)
+{	
+	vector<wchar_t> src16 = preparePath(src);
+	vector<wchar_t> dest16 = preparePath(dest);
+	
+	int r = _wrename(&src16[0], &dest16[0]);
+	if (r)
+	{
+		char buf[65536]; sprintf(buf, "Can't rename '%s' to '%s'. Error code is %i.", val_string(src), val_string(dest), r);
+		failure(buf);
+	}
+	
+	return val_null;
+}
+DEFINE_PRIM(filesystem_rename, 2);
