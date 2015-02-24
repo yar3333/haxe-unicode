@@ -1,4 +1,4 @@
-package neko.unicode;
+package unicode;
 
 import neko.Lib;
 

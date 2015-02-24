@@ -1,8 +1,6 @@
-package;
-
-import neko.unicode.UnicodeStringTools;
-import neko.unicode.File;
-import neko.unicode.FileSystem;
+import unicode.UnicodeStringTools;
+import unicode.File;
+import unicode.FileSystem;
 
 class UnicodeTest extends haxe.unit.TestCase
 {
@@ -31,7 +29,7 @@ class UnicodeTest extends haxe.unit.TestCase
 	public function testReadDir()
     {
 		var files = FileSystem.readDirectory(".");
-		print("\nFILES = \n" + files.join("\n") + "\nEND\n");
+		print("\nFILES = \n\t" + files.join("\n\t") + "\n");
 		assertTrue(true);
     }
 	
@@ -41,5 +39,19 @@ class UnicodeTest extends haxe.unit.TestCase
 		assertTrue(FileSystem.isDirectory("папка"));
 		assertTrue(!FileSystem.isDirectory("файл.txt"));
 		assertTrue(!FileSystem.isDirectory("file.txt"));
+    }
+	
+	public function testRename()
+    {
+		var src = "файл.txt";
+		var dest = "другое имя.txt";
+		
+		FileSystem.rename(src, dest);
+		assertTrue(!FileSystem.exists(src));
+		assertTrue(FileSystem.exists(dest));
+		
+		FileSystem.rename(dest, src);
+		assertTrue(!FileSystem.exists(dest));
+		assertTrue(FileSystem.exists(src));
     }
 }
