@@ -31,3 +31,7 @@ function rename(src, dest)
 	function getContent(filePath) : String
 	function saveContent(filePath, text)
 ```
+
+## unicode.EReg
+
+UTF-8 regular expressions compatible to standard `EReg` class.
