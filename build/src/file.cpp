@@ -1,3 +1,5 @@
+#if _WINDOWS
+
 #include <cstring>
 #include <stdio.h>
 #include <algorithm>
@@ -43,3 +45,5 @@ value file_save_content(value filePath, value content)
 	return val_true;
 }
 DEFINE_PRIM(file_save_content, 2);
+
+#endif

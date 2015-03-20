@@ -1,3 +1,5 @@
+#if _WINDOWS
+
 #include <dirent.h>
 #include <cstring>
 #include <stdio.h>
@@ -79,3 +81,5 @@ value filesystem_rename(value src, value dest)
 	return val_null;
 }
 DEFINE_PRIM(filesystem_rename, 2);
+
+#endif
