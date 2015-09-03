@@ -4,6 +4,7 @@
 #include <vector>
 #include <neko.h>
 
-std::vector<wchar_t> preparePath(value src);
+std::vector<wchar_t> preparePathIn(value src);
+value preparePathOut(const wchar_t *src);
 
 #endif	/* COMMON_H */

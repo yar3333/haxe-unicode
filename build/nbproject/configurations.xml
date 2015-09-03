@@ -34,6 +34,9 @@
               <pElem>D:/MyProg/_tools/motion-twin/neko/include</pElem>
               <pElem>src</pElem>
             </incDir>
+            <preprocessorList>
+              <Elem>_WINDOWS</Elem>
+            </preprocessorList>
           </ccTool>
         </makeTool>
       </makefileType>

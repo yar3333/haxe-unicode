@@ -1,6 +1,7 @@
 import unicode.UnicodeStringTools;
 import unicode.File;
 import unicode.FileSystem;
+using StringTools;
 
 class UnicodeTest extends haxe.unit.TestCase
 {
@@ -53,5 +54,33 @@ class UnicodeTest extends haxe.unit.TestCase
 		FileSystem.rename(dest, src);
 		assertTrue(!FileSystem.exists(dest));
 		assertTrue(FileSystem.exists(src));
+    }
+	
+	public function testStatA(path:String) stat("file.txt");
+	public function testStatB(path:String) stat("файл.txt");
+	
+	function stat(path:String)
+    {
+		var stat = FileSystem.stat(path);
+		
+		assertEquals(3, stat.size);
+		
+		assertTrue(Std.is(stat.atime, Date));
+		assertTrue(stat.atime.getTime() != 0);
+		
+		assertTrue(Std.is(stat.ctime, Date));
+		assertTrue(stat.ctime.getTime() != 0);
+		
+		assertTrue(Std.is(stat.mtime, Date));
+		assertTrue(stat.mtime.getTime() != 0);
+	}
+	
+	public function testFullPath()
+    {
+		var r = FileSystem.fullPath("файл.txt");
+		
+		assertTrue(r != null);
+		assertTrue(r != "");
+		assertTrue(r.endsWith("\\файл.txt") || r.endsWith("//файл.txt") );
     }
 }
