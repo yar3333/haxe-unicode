@@ -10,7 +10,7 @@ using namespace std;
 
 value file_get_content(value filePath)
 {	
-	vector<wchar_t> filePath16 = preparePath(filePath);
+	vector<wchar_t> filePath16 = preparePathIn(filePath);
 	FILE *f = _wfopen(&filePath16[0], L"rb");
 	if (!f)
 	{
@@ -34,7 +34,7 @@ DEFINE_PRIM(file_get_content, 1);
 
 value file_save_content(value filePath, value content)
 {	
-	FILE *f = _wfopen(&preparePath(filePath).front(), L"wb");
+	FILE *f = _wfopen(&preparePathIn(filePath).front(), L"wb");
 	if (!f)
 	{
 		char buf[65536]; sprintf(buf, "Can't open file '%s' for writing.", val_string(filePath));

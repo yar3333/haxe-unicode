@@ -6,6 +6,7 @@
       <in>common.h</in>
       <in>file.cpp</in>
       <in>filesystem.cpp</in>
+      <in>regexp.c</in>
       <in>string.cpp</in>
       <in>utf8.h</in>
       <in>utf8_core.h</in>
