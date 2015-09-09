@@ -12,12 +12,14 @@ class FileSystem
 	public static dynamic function rename(src:String, dest:String) : Void {}
 	public static dynamic function fullPath(path:String) : String return null;
 	public static dynamic function stat(path:String) : FileStat return null;
+	public static dynamic function deleteFile(path:String) : Void {}
+	public static dynamic function deleteDirectory(path:String) : Void {}
 	
 	static function __init__()
 	{
 		if (Sys.systemName() == "Windows")
 		{
-			createDirectory = function(path) Lib.nekoToHaxe(filesystem_create_directory(Lib.haxeToNeko(path)));
+			createDirectory = function(path) filesystem_create_directory(Lib.haxeToNeko(path));
 			exists = function(path) return filesystem_exists(Lib.haxeToNeko(path));
 			readDirectory = function(path) return Lib.nekoToHaxe(filesystem_read_directory(Lib.haxeToNeko(path)));
 			isDirectory = function(path) return filesystem_is_directory(Lib.haxeToNeko(path));
@@ -31,6 +33,8 @@ class FileSystem
 				r.ctime = Date.fromTime(cast r.ctime);
 				return r;
 			};
+			deleteFile = function(path) filesystem_delete_file(Lib.haxeToNeko(path));
+			deleteDirectory = function(path) filesystem_delete_directory(Lib.haxeToNeko(path));
 		}
 		else
 		{
@@ -41,6 +45,8 @@ class FileSystem
 			rename = sys.FileSystem.rename;
 			fullPath = sys.FileSystem.fullPath;
 			stat = sys.FileSystem.stat;
+			deleteFile = sys.FileSystem.deleteFile;
+			deleteDirectory = sys.FileSystem.deleteDirectory;
 		}
 	}
 	
@@ -51,4 +57,6 @@ class FileSystem
 	static var filesystem_rename = Lib.loadLazy("unicode", "filesystem_rename", 2);
 	static var filesystem_full_path = Lib.loadLazy("unicode", "filesystem_full_path", 1);
 	static var filesystem_stat = Lib.loadLazy("unicode", "filesystem_stat", 1);
+	static var filesystem_delete_file = Lib.loadLazy("unicode", "filesystem_delete_file", 1);
+	static var filesystem_delete_directory = Lib.loadLazy("unicode", "filesystem_delete_directory", 1);
 }
