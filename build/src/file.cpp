@@ -46,4 +46,60 @@ value file_save_content(value filePath, value content)
 }
 DEFINE_PRIM(file_save_content, 2);
 
+value file_copy(value srcFilePath, value destFilePath)
+{	
+	FILE *finp = _wfopen(&preparePathIn(srcFilePath).front(), L"rb");
+	if (!finp)
+	{
+		char buf[65536]; sprintf(buf, "Can't open file '%s' for reading.", val_string(srcFilePath));
+		failure(buf);
+	}
+	
+	FILE *fout = _wfopen(&preparePathIn(destFilePath).front(), L"wb");
+	if (!fout)
+	{
+		char buf[65536]; sprintf(buf, "Can't open file '%s' for writing.", val_string(destFilePath));
+		failure(buf);
+	}
+	
+	char buf[BUFSIZ];
+    size_t size;
+	while (size = fread(buf, 1, BUFSIZ, finp))
+	{
+        fwrite(buf, 1, size, fout);
+    }
+	
+	fclose(fout);
+	fclose(finp);
+	
+	return val_true;
+}
+DEFINE_PRIM(file_copy, 2);
+
+value file_delete_file(value filePath)
+{	
+	vector<wchar_t> filePath16 = preparePathIn(filePath);
+	int err = ::_wremove(&filePath16[0]);
+	if (err !=0 )
+	{
+		char buf[65536]; sprintf(buf, "Can't remove file '%s'.", val_string(filePath));
+		failure(buf);
+	}
+	return val_true;
+}
+DEFINE_PRIM(file_delete_file, 1);
+
+value file_delete_directory(value filePath)
+{	
+	vector<wchar_t> filePath16 = preparePathIn(filePath);
+	int err = ::_wrmdir(&filePath16[0]);
+	if (err !=0 )
+	{
+		char buf[65536]; sprintf(buf, "Can't remove directory '%s'.", val_string(filePath));
+		failure(buf);
+	}
+	return val_true;
+}
+DEFINE_PRIM(file_delete_directory, 1);
+
 #endif
