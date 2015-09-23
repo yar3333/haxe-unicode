@@ -14,7 +14,11 @@ using namespace std;
 value filesystem_create_directory(value path)
 {
 	vector<wchar_t> path16 = preparePathIn(path);
-	_wmkdir(&path16[0]);
+	if (_wmkdir(&path16[0]) != 0)
+	{
+		char buf[100]; sprintf(buf, "Error create directory: %i", errno);
+		failure(buf);
+	}
 	return val_null;
 }
 DEFINE_PRIM(filesystem_create_directory, 1);
