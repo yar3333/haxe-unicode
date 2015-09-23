@@ -2,6 +2,7 @@ package unicode;
 
 import neko.Lib;
 import sys.FileStat;
+using StringTools;
 
 class FileSystem
 {
@@ -19,7 +20,20 @@ class FileSystem
 	{
 		if (Sys.systemName() == "Windows")
 		{
-			createDirectory = function(path) filesystem_create_directory(Lib.haxeToNeko(path));
+			createDirectory = function(path)
+			{
+				path = path.replace("\\", "/");
+				var parts = path.split("/");
+				if (parts.length > 1)
+				{
+					createDirectory(parts.slice(0, parts.length - 1).join("/"));
+				}
+				else
+				{
+					if (!exists(path)) filesystem_create_directory(Lib.haxeToNeko(path));
+				}
+			};
+			
 			exists = function(path) return filesystem_exists(Lib.haxeToNeko(path));
 			readDirectory = function(path) return Lib.nekoToHaxe(filesystem_read_directory(Lib.haxeToNeko(path)));
 			isDirectory = function(path) return filesystem_is_directory(Lib.haxeToNeko(path));
