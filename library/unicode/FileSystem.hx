@@ -26,7 +26,6 @@ class FileSystem
 				var parts = path.split("/");
 				if (parts.length > 1) createDirectory(parts.slice(0, parts.length - 1).join("/"));
 					if (!exists(path)) filesystem_create_directory(Lib.haxeToNeko(path));
-				}
 			};
 			
 			exists = function(path) return filesystem_exists(Lib.haxeToNeko(path));
