@@ -24,12 +24,7 @@ class FileSystem
 			{
 				path = path.replace("\\", "/");
 				var parts = path.split("/");
-				if (parts.length > 1)
-				{
-					createDirectory(parts.slice(0, parts.length - 1).join("/"));
-				}
-				else
-				{
+				if (parts.length > 1) createDirectory(parts.slice(0, parts.length - 1).join("/"));
 					if (!exists(path)) filesystem_create_directory(Lib.haxeToNeko(path));
 				}
 			};
