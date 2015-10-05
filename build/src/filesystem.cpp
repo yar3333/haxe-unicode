@@ -140,4 +140,17 @@ value filesystem_full_path(value path)
 }
 DEFINE_PRIM(filesystem_full_path, 1);
 
+
+value filesystem_remove(value path)
+{
+	vector<wchar_t> path16 = preparePathIn(path);
+	if (_wremove(&path16[0]) != 0)
+	{
+		char buf[100]; sprintf(buf, "Error remove: %i", errno);
+		failure(buf);
+	}
+	return val_null;
+}
+DEFINE_PRIM(filesystem_remove, 1);
+
 #endif

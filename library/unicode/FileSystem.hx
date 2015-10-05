@@ -25,7 +25,7 @@ class FileSystem
 				path = path.replace("\\", "/");
 				var parts = path.split("/");
 				if (parts.length > 1) createDirectory(parts.slice(0, parts.length - 1).join("/"));
-					if (!exists(path)) filesystem_create_directory(Lib.haxeToNeko(path));
+				if (!exists(path)) filesystem_create_directory(Lib.haxeToNeko(path));
 			};
 			
 			exists = function(path) return filesystem_exists(Lib.haxeToNeko(path));
@@ -41,8 +41,8 @@ class FileSystem
 				r.ctime = Date.fromTime(cast r.ctime);
 				return r;
 			};
-			deleteFile = function(path) filesystem_delete_file(Lib.haxeToNeko(path));
-			deleteDirectory = function(path) filesystem_delete_directory(Lib.haxeToNeko(path));
+			deleteFile = function(path) filesystem_remove(Lib.haxeToNeko(path));
+			deleteDirectory = function(path) filesystem_remove(Lib.haxeToNeko(path));
 		}
 		else
 		{
@@ -65,6 +65,5 @@ class FileSystem
 	static var filesystem_rename = Lib.loadLazy("unicode", "filesystem_rename", 2);
 	static var filesystem_full_path = Lib.loadLazy("unicode", "filesystem_full_path", 1);
 	static var filesystem_stat = Lib.loadLazy("unicode", "filesystem_stat", 1);
-	static var filesystem_delete_file = Lib.loadLazy("unicode", "filesystem_delete_file", 1);
-	static var filesystem_delete_directory = Lib.loadLazy("unicode", "filesystem_delete_directory", 1);
+	static var filesystem_remove = Lib.loadLazy("unicode", "filesystem_remove", 1);
 }
