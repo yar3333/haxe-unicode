@@ -38,8 +38,8 @@ value filesystem_stat(value path)
 	value obj = alloc_object(NULL);
 	alloc_field(obj, val_id("gid"),   alloc_int  ((int)   data.st_gid));
 	alloc_field(obj, val_id("uid"),   alloc_int  ((int)   data.st_uid));
-	alloc_field(obj, val_id("atime"), alloc_float((double)data.st_atime));
-	alloc_field(obj, val_id("mtime"), alloc_float((double)data.st_mtime));
+	alloc_field(obj, val_id("atime"), alloc_float((double)data.st_atime * 1000.0));
+	alloc_field(obj, val_id("mtime"), alloc_float((double)data.st_mtime * 1000.0));
 	alloc_field(obj, val_id("ctime"), alloc_float((double)data.st_ctime));
 	alloc_field(obj, val_id("size"),  alloc_int  ((int)   data.st_size));
 	alloc_field(obj, val_id("dev"),   alloc_int  ((int)   data.st_dev));
