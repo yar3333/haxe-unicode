@@ -141,7 +141,7 @@ value filesystem_full_path(value path)
 DEFINE_PRIM(filesystem_full_path, 1);
 
 
-value filesystem_remove(value path)
+value filesystem_remove_file(value path)
 {
 	vector<wchar_t> path16 = preparePathIn(path);
 	if (_wremove(&path16[0]) != 0)
@@ -151,6 +151,18 @@ value filesystem_remove(value path)
 	}
 	return val_null;
 }
-DEFINE_PRIM(filesystem_remove, 1);
+DEFINE_PRIM(filesystem_remove_file, 1);
+
+value filesystem_remove_directory(value path)
+{
+	vector<wchar_t> path16 = preparePathIn(path);
+	if (_wrmdir(&path16[0]) != 0)
+	{
+		char buf[100]; sprintf(buf, "Error rmdir: %i", errno);
+		failure(buf);
+	}
+	return val_null;
+}
+DEFINE_PRIM(filesystem_remove_directory, 1);
 
 #endif
