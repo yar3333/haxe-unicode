@@ -41,8 +41,8 @@ class FileSystem
 				r.ctime = Date.fromTime(cast r.ctime);
 				return r;
 			};
-			deleteFile = function(path) filesystem_remove(Lib.haxeToNeko(path));
-			deleteDirectory = function(path) filesystem_remove(Lib.haxeToNeko(path));
+			deleteFile = function(path) filesystem_remove_file(Lib.haxeToNeko(path));
+			deleteDirectory = function(path) filesystem_remove_directory(Lib.haxeToNeko(path));
 		}
 		else
 		{
@@ -65,5 +65,6 @@ class FileSystem
 	static var filesystem_rename = Lib.loadLazy("unicode", "filesystem_rename", 2);
 	static var filesystem_full_path = Lib.loadLazy("unicode", "filesystem_full_path", 1);
 	static var filesystem_stat = Lib.loadLazy("unicode", "filesystem_stat", 1);
-	static var filesystem_remove = Lib.loadLazy("unicode", "filesystem_remove", 1);
+	static var filesystem_remove_file = Lib.loadLazy("unicode", "filesystem_remove_file", 1);
+	static var filesystem_remove_directory = Lib.loadLazy("unicode", "filesystem_remove_directory", 1);
 }
