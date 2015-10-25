@@ -4,8 +4,8 @@
   "tags": ["utf8","utf-8","localization","neko"],
   "description": "Conversion from system default charset to utf-8 and vise versa. Working with national-named files on Windows. Support utf-8 regular expressions.",
   "contributors": ["yar3333"],
-  "releasenote": "FileSystem: createDirectory, deleteFile and deleteDirectory bugfixes. Recompile on Windows.",
-  "version": "1.3.0",
+  "releasenote": "FileSystem.stat() dates bugfix. FileSystem.deleteDirectory bugfix. Some other bugfixes.",
+  "version": "1.4.0",
   "url": "https://bitbucket.org/yar3333/haxe-unicode",
   "dependencies": {}
 }
