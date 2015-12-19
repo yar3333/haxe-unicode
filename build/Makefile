@@ -1,7 +1,7 @@
 default: pcre build
 
-include Makefile.platform
-include Makefile.ndll
+include Makefile-platform
+include Makefile-ndll
 
 PROJECT=unicode
 
