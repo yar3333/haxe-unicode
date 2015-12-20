@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="95">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df root="src" name="0">
-      <in>common.cpp</in>
-      <in>common.h</in>
-      <in>file.cpp</in>
-      <in>filesystem.cpp</in>
-      <in>string.cpp</in>
-    </df>
+    <logicalFolder name="src" displayName="src" projectFiles="true">
+      <itemPath>src/common.cpp</itemPath>
+      <itemPath>src/common.h</itemPath>
+      <itemPath>src/file.cpp</itemPath>
+      <itemPath>src/filesystem.cpp</itemPath>
+      <itemPath>src/regexp.c</itemPath>
+      <itemPath>src/string.cpp</itemPath>
+      <itemPath>src/utf8.h</itemPath>
+      <itemPath>src/utf8_core.h</itemPath>
+    </logicalFolder>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
@@ -48,7 +51,13 @@
       </item>
       <item path="src/filesystem.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/string.cpp" ex="false" tool="1" flavor2="4">
+      <item path="src/regexp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/string.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/utf8.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/utf8_core.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
