@@ -1,7 +1,6 @@
-syntax: glob
 bin
 build/obj
-library.zip
+library/library.zip
 build/pcre/.deps/
 build/pcre/.libs/
 build/nbproject/private/
